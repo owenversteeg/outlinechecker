@@ -8,10 +8,12 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      @media screen and (min-width:980px) {
+        body {
+          padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
       }
     </style>
 
@@ -50,22 +52,104 @@
     </div>
 
     <div class="container">
+      <form action="index.html" method="get">
+        <p>1) When was the Mongol Empire officially founded?</p>
+        <input type="text" name="founded">
+        
+        <p>2) What’s the largest & most important word on our Wordle, besides “Mongol”?</p>
+        <input type="text" name="wordle">
+        
+        <p>3) How many sq. km did the Mongolian Empire cover at its greatest extent?</p>
+        <input type="text" name="extent">
+        
+        <p>4) What two continents was the Mongolian Empire located on?</p>
+        <input type="text" name="continents">
 
-      <p>When was the Mongol Empire officially founded?</p>
-      <input type="text" id="founded">
-      
-      <p>What’s the largest & most important word on our Wordle, besides “Mongol”?</p>
-      <input type="text" id="wordle">
-      
-      <p>3. How many sq. km did the Mongolian Empire cover at its greatest extent?</p>
-      <input type="text" id="extent">
-      
+        <p>5) What was Genghis Khan’s name before he was known as Genghis Khan?</p>
+        <input type="text" name="name">
+
+        <p>6) How many people were in the Mongol military at its greatest extent?</p>
+        <input type="text" name="military">    
+
+        <p>7) About what percentage of the Mongol population did the military make up?</p>
+        <input type="text" name="armypercent">
+
+        <p>8) Which way did the Empire expand for 21 years until the ruler, Genghis Khan, died in 1227?</p>
+        <input type="text" name="expand">
+
+        <p>9) Who tried to reduce corruption in 1246?</p>
+        <input type="text" name="corrupt">  
+
+        <p>10) When the Mongol Empire fell, what 4 separate khanates did it fracture into?</p>
+        <input type="text" name="fracture">  
+
+        <br>
+
+        <input type="submit" class="btn btn-large btn-success" value="Check & Save" />
+      </form>
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 
+    <script>
+    var score, name, wrongs;
+
+    score=0;
+    wrongs = "";
+
+    var params={};
+    document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+        function decode(s) {
+            return decodeURIComponent(s.split("+").join(" "));
+        }
+        params[decode(arguments[1])] = decode(arguments[2]);
+    });
+
+    function parseNum(numbertoparse) {
+      if (numbertoparse) {
+       return parseInt(numbertoparse.replace(/\D/g, ''));
+      }
+      else {
+        return 0;
+      }
+    }
+
+    function parseText(texttoparse) {
+      if (texttoparse) {
+        return texttoparse.toLowerCase();
+      }
+      else {
+        return null;
+      }
+    }
+
+    function addBad(numtoscore) {
+      score++;
+      wrongs = ""+wrongs+numtoscore+" ";
+    }
+
+    if (parseNum(params['founded'])!=1206) addBad(1);
+    if (parseText(params['wordle'])!='genghis') addBad(1);
+    if (parseNum(params['extent'])!=24000000) addBad(1);
+    if (parseText(params['wordle'])!='genghis') addBad(1);
+    if (parseText(params['continents']).indexOf('asia')==-1 || parseText(params['continents']).indexOf('europe')==-1) addBad(1);
+    if (parseText(params['name'])!='temujin') addBad(1);
+    if (parseNum(params['military'])!=100000) addBad(1);
+    if (parseText(params['armypercent']).indexOf('.1')==-1) addBad(1);
+    if (parseText(params['expand'])!='west') addBad(1);
+    if (parseText(params['corrupt'])!='guyuk') addBad(1);
+    if (parseText(params['fracture']).indexOf('golden horde')==-1 || parseText(params['fracture']).indexOf('chagatai')==-1 || parseText(params['fracture']).indexOf('yuan')==-1 || parseText(params['fracture']).indexOf('ilkhanate')==-1) addBad(1);
+
+    if (wrongs.length>0) { 
+      alert('You got wrong these questions: '+wrongs); 
+    }
+
+    else { 
+      alert('You got all the answers right!');
+    }
+    </script>
   </body>
 </html>
