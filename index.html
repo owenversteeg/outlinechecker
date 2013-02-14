@@ -132,16 +132,15 @@
     }
 
     if (parseNum(params['founded'])!=1206) addBad(1);
-    if (parseText(params['wordle'])!='genghis') addBad(1);
-    if (parseNum(params['extent'])!=24000000) addBad(1);
-    if (parseText(params['wordle'])!='genghis') addBad(1);
-    if (parseText(params['continents']).indexOf('asia')==-1 || parseText(params['continents']).indexOf('europe')==-1) addBad(1);
-    if (parseText(params['name'])!='temujin') addBad(1);
-    if (parseNum(params['military'])!=100000) addBad(1);
-    if (parseText(params['armypercent']).indexOf('.1')==-1) addBad(1);
-    if (parseText(params['expand'])!='west') addBad(1);
-    if (parseText(params['corrupt'])!='guyuk') addBad(1);
-    if (parseText(params['fracture']).indexOf('golden horde')==-1 || parseText(params['fracture']).indexOf('chagatai')==-1 || parseText(params['fracture']).indexOf('yuan')==-1 || parseText(params['fracture']).indexOf('ilkhanate')==-1) addBad(1);
+    if (parseText(params['wordle'])!='genghis') addBad(2);
+    if (parseNum(params['extent'])!=24000000) addBad(3);
+    if (parseText(params['continents']).indexOf('asia')==-1 || parseText(params['continents']).indexOf('europe')==-1) addBad(4);
+    if (parseText(params['name'])!='temujin') addBad(5);
+    if (parseNum(params['military'])!=100000) addBad(6);
+    if (parseText(params['armypercent']).indexOf('.1')==-1) addBad(7);
+    if (parseText(params['expand'])!='west') addBad(8);
+    if (parseText(params['corrupt'])!='guyuk') addBad(9);
+    if (parseText(params['fracture']).indexOf('golden horde')==-1 || parseText(params['fracture']).indexOf('chagatai')==-1 || parseText(params['fracture']).indexOf('yuan')==-1 || parseText(params['fracture']).indexOf('ilkhanate')==-1) addBad(10);
 
     if (wrongs.length>0) { 
       alert('You got wrong these questions: '+wrongs); 
